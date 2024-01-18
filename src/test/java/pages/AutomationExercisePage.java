@@ -24,12 +24,34 @@ public class AutomationExercisePage {
      */
 
 
-    //Classic Tag name - Attribute - Value Selector
+    //Main page  → Header → "Signup / Login" Link Locator
     @FindBy(xpath = "//header[@id='header'] //a[contains(text(), 'Signup')]")
-    public WebElement signupLoginLink;
+    public WebElement headerSignupLoginLink;
 
 
 
+
+    /*
+     * ==========================================
+     *   /Login
+     * ==========================================
+     */
+
+    //Login page  → Content → Form → "New User Signup!" Text element
+    @FindBy(xpath = "//section[@id='form'] //div[@class='row'] //*[contains(text(), 'User Signup')]")
+    public WebElement loginContentFormNewUserSingupText;
+
+    //Login page  → Content → Form → "Name" input element
+    @FindBy(xpath = "//section[@id='form']  //div[@class='signup-form'] //input[@name='name']")
+    public WebElement loginContentFormNameInput;
+
+    //Login page  → Content → Form → "Email Adress" input element
+    @FindBy(xpath = "//section[@id='form']  //div[@class='signup-form'] //input[@name='email']")
+    public WebElement loginContentFormEmailInput;
+
+    //Login page  → Content → Form → "Singup" button element
+    @FindBy(xpath = "//section[@id='form'] //div[@class='signup-form']  //button[contains(text(), 'Signup')]")
+    public WebElement loginContentFormSignupButton;
 
 
 
