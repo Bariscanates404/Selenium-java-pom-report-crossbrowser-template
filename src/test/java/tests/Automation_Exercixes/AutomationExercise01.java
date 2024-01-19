@@ -29,12 +29,28 @@ public class AutomationExercise01 extends TestBaseRapor {
         autEx.headerSignupLoginLink.click();
         extentTest.info("5. Verify 'New User Signup!' is visible");
         autEx.loginContentFormNewUserSingupText.isDisplayed();
-        extentTest.info("4. Enter name and email address");
+        extentTest.info("6. Enter name and email address");
         autEx.loginContentFormNameInput.sendKeys(fakeUserName);
         autEx.loginContentFormEmailInput.sendKeys(fakeEmail);
-        extentTest.info("5. Click 'Signup' button");
+        extentTest.info("7. Click 'Signup' button");
         autEx.loginContentFormSignupButton.click();
+        extentTest.pass("8. Verify that 'ENTER ACCOUNT INFORMATION' is visible");
+
+
+
         extentTest.pass("6. Verify that 'ENTER ACCOUNT INFORMATION' is visible");
+        extentTest.pass("6. Verify that 'ENTER ACCOUNT INFORMATION' is visible");
+        extentTest.pass("6. Verify that 'ENTER ACCOUNT INFORMATION' is visible");
+        extentTest.pass("6. Verify that 'ENTER ACCOUNT INFORMATION' is visible");
+        extentTest.pass("6. Verify that 'ENTER ACCOUNT INFORMATION' is visible");
+
+
+
+
+
+
+
+
 
     }
 
