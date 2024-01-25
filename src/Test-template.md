@@ -1,9 +1,9 @@
 ```java
-package tests.day13_TestNGReports;
+package tests.XXXXXXXX;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.TestOtomasyonuPage;
+import pages.XXXXXXXXXX;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;

@@ -20,6 +20,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.*;
+import java.util.NoSuchElementException;
 
 public class ReusableMethods {
 
@@ -387,21 +388,65 @@ public class ReusableMethods {
 
     }
 
+
     /**
      * checkAnyElementIsActiveOrDisplayedXPATH
      * <pre>
-     *         XPATH standardinda locatoru verilen herhangi bir elementin varligini,
-     *         gorunurlugunu kontrol eder
+     *         XPATH standardinda WebElementi verilen herhangi bir elementin varligini kontrol eder
+     * </pre>
+     *
+     * @param element Xpath WebElement element ByLocator
+     * @author Baris Can Ates
+     */
+    public static boolean checkAnyElementExistenceByXpathWebElement (WebElement element) {
+        ReusableMethods.waitFor(1);
+
+        List<WebElement> elementList = element.findElements(By.xpath("."));
+
+        if (elementList.size() > 0) {
+            // Element is present
+            return true;
+        } else {
+            // Element is not present
+            return false;
+        }
+    }
+    /**
+     * checkAnyElementIsActiveOrDisplayedXPATH
+     * <pre>
+     *         CSS standardinda WebElementi verilen herhangi bir elementin varligini kontrol eder
+     * </pre>
+     *
+     * @param element WebElement element ByLocator
+     * @author Baris Can Ates
+     */
+    public static boolean checkAnyElementExistenceByCssWebElement (WebElement element) {
+        ReusableMethods.waitFor(1);
+
+        List<WebElement> elementList = element.findElements(By.cssSelector("."));
+
+        if (elementList.size() > 0) {
+            // Element is present
+            return true;
+        } else {
+            // Element is not present
+            return false;
+        }
+    }
+
+    /**
+     * checkAnyElementIsActiveOrDisplayedXPATH
+     * <pre>
+     *         XPATH standardinda locatoru verilen herhangi bir elementin varligini kontrol eder
      * </pre>
      *
      * @param XPATHlocator String locator
      * @author Baris Can Ates
      */
-    public static boolean checkAnyElementIsActiveOrDisplayedXPATH(String XPATHlocator) {
+    public static boolean checkAnyElementExistenceStringXPATH(String XPATHlocator) {
         ReusableMethods.waitFor(1);
 
         List<WebElement> elementList = Driver.getDriver().findElements(By.xpath(XPATHlocator));
-        System.out.println(elementList.size());
         if (elementList.size() > 0) {
             // Element is present
             return true;
@@ -414,8 +459,7 @@ public class ReusableMethods {
     /**
      * checkAnyElementIsActiveOrDisplayedCSS
      * <pre>
-     *         CSS standardinda locatoru verilen herhangi bir elementin varligini,
-     *         gorunurlugunu kontrol eder
+     *         CSS standardinda locatoru verilen herhangi bir elementin varligini kontrol eder
      * </pre>
      *
      * @param CSSlocator String locator
@@ -425,7 +469,6 @@ public class ReusableMethods {
         ReusableMethods.waitFor(1);
 
         List<WebElement> elementList = Driver.getDriver().findElements(By.xpath(CSSlocator));
-        System.out.println(elementList.size());
         if (elementList.size() > 0) {
             // Element is present
             return true;
@@ -434,7 +477,6 @@ public class ReusableMethods {
             return false;
         }
     }
-
 
 
 }
