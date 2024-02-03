@@ -5,8 +5,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
 
-import java.util.List;
-
 public class AutomationExercisePage {
 
     public AutomationExercisePage() {
@@ -138,15 +136,8 @@ public class AutomationExercisePage {
     public WebElement signupContentLoginFormMobileNumberInput;
 
     //Signup page  → Content → Login Form → Create Account Button
-    @FindBy(xpath = "//div[@class='login-form']//button[@data-qa='create-account']")
+        @FindBy(xpath = "//div[@class='login-form']//button[@data-qa='create-account']")
     public WebElement signupContentLoginFormCreateAccountButton;
-
-
-
-
-
-
-
 
 
 

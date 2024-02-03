@@ -3,6 +3,7 @@ package utilities;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
@@ -20,7 +21,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.*;
-import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 public class ReusableMethods {
 
@@ -188,21 +189,34 @@ public class ReusableMethods {
     }
 
     /**
-     * waitForElementsVisibility
-     * <pre>
-     *            Bir WebElementin gorunur olmasini verilen sure kadar bekler
-     *            eger verilen sure icerisinde gorunur olursa WebElementi dondurur
-     * </pre>
+     * Waits for a WebElement to be visible within a specified timeout.
      *
-     * @param element Hedef WebElement
-     * @param timeout beklemesini sitediginiz sure (saniye)
-     * @return WebElement
+     * <p>
+     * This method waits for the provided WebElement to be visible within the given timeout.
+     * If the element does not become visible within the specified duration, it logs an error and
+     * throws a RuntimeException.
+     * </p>
+     *
+     * @param element The WebElement to wait for visibility.
+     * @param timeout The maximum time (in seconds) to wait for the element to become visible.
+     * @return WebElement The visible WebElement.
+     * @throws RuntimeException If the element is not visible within the specified timeout.
      * @author Baris Can Ates
      */
     public static WebElement waitForElementsVisibility(WebElement element, int timeout) {
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeout));
-        return wait.until(ExpectedConditions.visibilityOf(element));
+        try {
+            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeout));
+            return wait.until(ExpectedConditions.visibilityOf(element));
+        } catch (TimeoutException e) {
+            // Log an error and throw a RuntimeException if the element is not visible after the timeout
+            String errorMessage = String.format(
+                    "Element %s is not visible after %d seconds.",
+                    element.toString(), timeout);
+            System.err.println(errorMessage);
+            throw new RuntimeException(errorMessage);
+        }
     }
+
 
     /**
      * waitForAnElementsClickability
@@ -239,14 +253,16 @@ public class ReusableMethods {
     }
 
     /**
-     * clickAnElementWithTimeOut
-     * <pre>
-     *           WebElement olarak verilen elemente ozel bir zaman araliginda
-     *           saniyede bir kere tiklamayi dener
-     * </pre>
+     * Attempts to click a WebElement within a specified timeout.
      *
-     * @param element Hedef WebElement
-     * @param timeout Tiklanmasini istediginiz sure (saniye)
+     * <p>
+     * This method attempts to click the provided WebElement within the specified timeout.
+     * If the click is unsuccessful during the timeout, it logs an error and throws a RuntimeException.
+     * </p>
+     *
+     * @param element The WebElement to click.
+     * @param timeout The maximum time (in seconds) to attempt clicking the element.
+     * @throws RuntimeException If the element cannot be clicked within the specified timeout.
      * @author Baris Can Ates
      */
     public static void clickAnElementWithTimeOut(WebElement element, int timeout) {
@@ -255,10 +271,20 @@ public class ReusableMethods {
                 element.click();
                 return;
             } catch (WebDriverException e) {
+                // Log an error if clicking is unsuccessful, and retry
+                System.err.println(String.format(
+                        "Attempt %d: Clicking on element %s failed. Retrying...", i + 1, element.toString()));
                 waitFor(1);
             }
         }
+        // Log an error and throw a RuntimeException if clicking is unsuccessful after the retry attempts
+        String errorMessage = String.format(
+                "Clicking on element %s failed after %d attempts.", element.toString(), timeout);
+        System.err.println(errorMessage);
+        throw new RuntimeException(errorMessage);
     }
+
+
 
     /**
      * waitForPageToLoad
@@ -478,5 +504,177 @@ public class ReusableMethods {
         }
     }
 
+
+
+    /**
+     * Scrolls the web page to the top.
+     *
+     * <p>
+     * This method uses JavaScriptExecutor to scroll the web page to the top.
+     * </p>
+     *
+     * @param driver The WebDriver instance to perform the scrolling.
+     * @author Baris Can Ates
+     */
+    public static void scrollToTop(WebDriver driver) {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("window.scrollTo(0, 0)");
+    }
+
+    /**
+     * Scrolls the web page to position the given WebElement in the middle of the visible area.
+     *
+     * <p>
+     * This method utilizes JavaScriptExecutor to calculate the target scroll position
+     * based on the Y coordinate of the provided WebElement and the inner height of the window.
+     * It then scrolls to the calculated position, ensuring that the WebElement is positioned
+     * in the middle of the visible area of the web page.
+     * </p>
+     *
+     * @param driver   The WebDriver instance to perform the scrolling.
+     * @param element  The WebElement to be centered in the middle of the visible area.
+     *
+     * @author Baris Can Ates
+     */
+    public static void scrollToMiddle(WebDriver driver, WebElement element) {
+        // Create a JavascriptExecutor instance for executing JavaScript code
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+
+        /* WHY NUMBER
+         * We used Number instead of double or long to accommodate both integer and
+         * floating-point values that may be returned by JavaScript in the executeScript
+         * method, allowing for flexibility in handling different numeric types.
+         */
+
+        // Get the Y coordinate of the provided WebElement
+        Number elementY = (Number) jsExecutor.executeScript("return arguments[0].getBoundingClientRect().top", element);
+
+        // Get the inner height of the window (visible area)
+        Number innerHeight = (Number) jsExecutor.executeScript("return window.innerHeight");
+
+        // Calculate the target scroll position to bring the element to the middle
+        double targetScrollPosition = elementY.doubleValue() + innerHeight.doubleValue() / 2;
+
+        // Scroll to the target position
+        jsExecutor.executeScript("window.scrollTo(0, arguments[0])", targetScrollPosition);
+    }
+
+    /**
+     * Scrolls the web page to the bottom.
+     *
+     * <p>
+     * This method uses JavaScriptExecutor to scroll the web page to the bottom.
+     * </p>
+     *
+     * @param driver The WebDriver instance to perform the scrolling.
+     * @author Baris Can Ates
+     */
+    public static void scrollToBottom(WebDriver driver) {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+    }
+
+    /**
+     * Scrolls the web page to make the provided WebElement visible.
+     *
+     * <p>
+     * This method uses JavaScriptExecutor to scroll the web page to make the provided WebElement visible.
+     * </p>
+     *
+     * @param driver  The WebDriver instance to perform the scrolling.
+     * @param element The WebElement to be made visible.
+     * @author Baris Can Ates
+     */
+    public static void scrollIntoView(WebDriver driver, WebElement element) {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+    /**
+     * Scrolls the web page by a specified number of pixels.
+     *
+     * <p>
+     * This method uses JavaScriptExecutor to scroll the web page by a specified number of pixels.
+     * Positive values scroll down, negative values scroll up.
+     * </p>
+     *
+     * @param driver The WebDriver instance to perform the scrolling.
+     * @param pixels The number of pixels to scroll.
+     * @author Baris Can Ates
+     */
+    public static void scrollByPixels(WebDriver driver, int pixels) {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("window.scrollBy(0, arguments[0])", pixels);
+    }
+
+
+    /**
+     * Selects an option from a dropdown by its visible text.
+     *
+     * <p>
+     * This method uses the Select class in Selenium to choose an option from the dropdown
+     * based on its visible text.
+     * </p>
+     *
+     * @param dropdownElement WebElement representing the dropdown
+     * @param visibleText     The visible text of the option to be selected
+     * @author Baris Can Ates
+     */
+    public static void selectByVisibleText(WebElement dropdownElement, String visibleText) {
+        Select select = new Select(dropdownElement);
+        select.selectByVisibleText(visibleText);
+    }
+
+    /**
+     * Selects an option from a dropdown by its index.
+     *
+     * <p>
+     * This method uses the Select class in Selenium to choose an option from the dropdown
+     * based on its index.
+     * </p>
+     *
+     * @param dropdownElement WebElement representing the dropdown
+     * @param index           The index of the option to be selected
+     * @author Baris Can Ates
+     */
+    public static void selectByIndex(WebElement dropdownElement, int index) {
+        Select select = new Select(dropdownElement);
+        select.selectByIndex(index);
+    }
+
+    /**
+     * Selects an option from a dropdown by its value.
+     *
+     * <p>
+     * This method uses the Select class in Selenium to choose an option from the dropdown
+     * based on its value.
+     * </p>
+     *
+     * @param dropdownElement WebElement representing the dropdown
+     * @param value           The value of the option to be selected
+     * @author Baris Can Ates
+     */
+    public static void selectByValue(WebElement dropdownElement, String value) {
+        Select select = new Select(dropdownElement);
+        select.selectByValue(value);
+    }
+
+    /**
+     * Gets all options from a dropdown.
+     *
+     * <p>
+     * This method uses the Select class in Selenium to retrieve all available options
+     * from the dropdown.
+     * </p>
+     *
+     * @param dropdownElement WebElement representing the dropdown
+     * @return List of all options as Strings
+     * @author Baris Can Ates
+     */
+    public static List<String> getAllOptions(WebElement dropdownElement) {
+        Select select = new Select(dropdownElement);
+        List<WebElement> optionElements = select.getOptions();
+        return optionElements.stream().map(WebElement::getText).collect(Collectors.toList());
+    }
 
 }
