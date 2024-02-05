@@ -1,5 +1,6 @@
 package tests.Automation_Exercises;
 
+
 import org.testng.annotations.Test;
 import pages.AutomationExercisePage;
 import utilities.ConfigReader;
@@ -9,12 +10,12 @@ import utilities.ReusableMethods;
 import utilities.TestBaseRapor;
 
 public class AutomationExercise01 extends TestBaseRapor {
+
     AutomationExercisePage autEx = new AutomationExercisePage();
 
     @Test
     public void TC01() {
         extentTest = extentReports.createTest("Test Case 1: Register User", "User registers");
-
         // Step 1: Launch browser and navigate to the URL
         extentTest.info("Step 1: Launch browser and navigate to the URL");
         Driver.getDriver().get(ConfigReader.getProperty("autExUrl"));
@@ -48,15 +49,15 @@ public class AutomationExercise01 extends TestBaseRapor {
 
         // Select a day from the "Days" dropdown using its index
         extentTest.info("Step 7: Select a day from the 'Days' dropdown using its index");
-        ReusableMethods.selectByIndex(autEx.signupContentLoginFormDaysDropdown, 1);
+        ReusableMethods.selectDropdownByIndex(autEx.signupContentLoginFormDaysDropdown, 1, "Days");
 
         // Select a month from the "Months" dropdown using its visible text
         extentTest.info("Step 7: Select a month from the 'Months' dropdown using its visible text");
-        ReusableMethods.selectByVisibleText(autEx.signupContentLoginFormMonthsDropdown, "June");
+        ReusableMethods.selectDropdownByText(autEx.signupContentLoginFormMonthsDropdown, "June", "Months");
 
         // Select a year from the "Years" dropdown using its value
         extentTest.info("Step 7: Select a year from the 'Years' dropdown using its value");
-        ReusableMethods.selectByValue(autEx.signupContentLoginFormYearsDropdown, "1990");
+        ReusableMethods.selectDropdownByValue(autEx.signupContentLoginFormYearsDropdown, "1990", "Years");
 
         // Step 8: Select checkbox 'Sign up for our newsletter!'
         extentTest.info("Step 8: Select checkbox 'Sign up for our newsletter!'");
@@ -81,9 +82,10 @@ public class AutomationExercise01 extends TestBaseRapor {
 
         // Step 11: Click 'Create Account button'
         extentTest.info("Step 11: Click 'Create Account button'");
-        ReusableMethods.scrollToMiddle(Driver.getDriver(), autEx.signupContentLoginFormCreateAccountButton);
-        ReusableMethods.waitForAnElementsClickability(autEx.signupContentLoginFormCreateAccountButton, 5000).click();
+        ReusableMethods.scrollToMiddleOfPage(Driver.getDriver(), autEx.signupContentLoginFormCreateAccountButton);
+        autEx.signupContentLoginFormCreateAccountButton.click();
 
-        //...
+
+        //... (continue with additional steps if any)
     }
 }
