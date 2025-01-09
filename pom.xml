@@ -14,18 +14,23 @@
     </properties>
 
     <dependencies>
+        <!-- Selenium Java dependency for browser automation -->
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>4.13.0</version>
         </dependency>
+
+        <!-- WebDriver Manager for managing browser drivers automatically -->
         <!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>5.5.2</version>
         </dependency>
+
+        <!-- TestNG framework for test execution and reporting -->
         <!-- https://mvnrepository.com/artifact/org.testng/testng -->
         <dependency>
             <groupId>org.testng</groupId>
@@ -34,6 +39,7 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Java Faker for generating fake data -->
         <!-- https://mvnrepository.com/artifact/com.github.javafaker/javafaker -->
         <dependency>
             <groupId>com.github.javafaker</groupId>
@@ -41,26 +47,30 @@
             <version>1.0.2</version>
         </dependency>
 
+        <!-- ExtentReports for generating test execution reports -->
         <!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
         <dependency>
             <groupId>com.aventstack</groupId>
             <artifactId>extentreports</artifactId>
             <version>4.0.9</version>
         </dependency>
+
+        <!-- Automation library -->
         <dependency>
             <groupId>io.github.sukgu</groupId>
             <artifactId>automation</artifactId>
             <version>0.1.5</version>
         </dependency>
 
-
-        <!-- API TEST DEPS -->        <!-- API TEST DEPS -->        <!-- API TEST DEPS -->        <!-- API TEST DEPS -->
+        <!-- API Testing Dependencies -->
         <!-- https://mvnrepository.com/artifact/org.json/json -->
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20230227</version>
+            <version>20231013</version>
         </dependency>
+
+        <!-- JUnit for unit testing -->
         <!-- https://mvnrepository.com/artifact/junit/junit -->
         <dependency>
             <groupId>junit</groupId>
@@ -68,6 +78,8 @@
             <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Rest-Assured for API testing -->
         <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
         <dependency>
             <groupId>io.rest-assured</groupId>
@@ -75,14 +87,44 @@
             <version>5.3.2</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Gson for JSON processing -->
         <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.9.0</version>
         </dependency>
-        <!-- API TEST DEPS -->        <!-- API TEST DEPS -->        <!-- API TEST DEPS -->        <!-- API TEST DEPS -->
 
+        <!-- Trello API Testing Dependencies -->
+        <!-- Annotations library for improved code readability -->
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>24.1.0</version>
+        </dependency>
+
+        <!-- Unirest for HTTP client operations -->
+        <dependency>
+            <groupId>com.mashape.unirest</groupId>
+            <artifactId>unirest-java</artifactId>
+            <version>1.4.9</version>
+        </dependency>
+
+        <!-- Gson for JSON handling (version specific to Trello needs) -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10.1</version>
+        </dependency>
+
+        <!-- JUnit Jupiter API for modern unit testing -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
 
     </dependencies>
 
