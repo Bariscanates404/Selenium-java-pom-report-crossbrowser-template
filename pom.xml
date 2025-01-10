@@ -14,12 +14,14 @@
     </properties>
 
     <dependencies>
+        <!-- UI Testing Dependencies -->
+
         <!-- Selenium Java dependency for browser automation -->
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.13.0</version>
+            <version>4.16.1</version>
         </dependency>
 
         <!-- WebDriver Manager for managing browser drivers automatically -->
@@ -27,7 +29,7 @@
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>5.5.2</version>
+            <version>5.6.2</version>
         </dependency>
 
         <!-- TestNG framework for test execution and reporting -->
@@ -63,21 +65,6 @@
         </dependency>
 
         <!-- API Testing Dependencies -->
-        <!-- https://mvnrepository.com/artifact/org.json/json -->
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20231013</version>
-        </dependency>
-
-        <!-- JUnit for unit testing -->
-        <!-- https://mvnrepository.com/artifact/junit/junit -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
-            <scope>test</scope>
-        </dependency>
 
         <!-- Rest-Assured for API testing -->
         <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
@@ -88,22 +75,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Gson for JSON processing -->
-        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.9.0</version>
-        </dependency>
-
-        <!-- Trello API Testing Dependencies -->
-        <!-- Annotations library for improved code readability -->
-        <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>24.1.0</version>
-        </dependency>
-
         <!-- Unirest for HTTP client operations -->
         <dependency>
             <groupId>com.mashape.unirest</groupId>
@@ -111,11 +82,49 @@
             <version>1.4.9</version>
         </dependency>
 
-        <!-- Gson for JSON handling (version specific to Trello needs) -->
+        <!-- JSON processing dependencies -->
+
+        <!-- Gson for JSON handling -->
+        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.10.1</version>
+        </dependency>
+
+        <!-- JSON library -->
+        <!-- https://mvnrepository.com/artifact/org.json/json -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20231013</version>
+        </dependency>
+
+        <!-- Logging Dependencies -->
+
+        <!-- Log4j integration with SLF4J -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>2.20.0</version>
+        </dependency>
+
+        <!-- SLF4J simple logger -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>2.0.9</version>
+        </dependency>
+
+        <!-- Testing Framework Dependencies -->
+
+        <!-- JUnit for unit testing -->
+        <!-- https://mvnrepository.com/artifact/junit/junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
         </dependency>
 
         <!-- JUnit Jupiter API for modern unit testing -->
@@ -126,6 +135,14 @@
             <scope>compile</scope>
         </dependency>
 
+        <!-- Utilities -->
+
+        <!-- Annotations library for improved code readability -->
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>24.1.0</version>
+        </dependency>
     </dependencies>
 
 </project>

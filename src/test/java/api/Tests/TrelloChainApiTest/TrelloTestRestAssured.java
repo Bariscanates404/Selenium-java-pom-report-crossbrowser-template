@@ -1,4 +1,4 @@
-package api.Tests.TrelloChainApiTest;
+ package api.Tests.TrelloChainApiTest;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;

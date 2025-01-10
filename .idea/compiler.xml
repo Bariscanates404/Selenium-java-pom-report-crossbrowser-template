@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="selenium-java-pom-test-template" />
+        <module name="com.unityverse_TestNG" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
