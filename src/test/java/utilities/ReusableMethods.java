@@ -1209,4 +1209,27 @@ public class ReusableMethods {
             throw e;
         }
     }
+
+
+    /**
+     * highLightToElement
+     * <pre>
+     * WebElement'in çevresinde bir vurgulama efekti oluşturur. Bu yöntem,
+     * özellikle hata ayıklama sırasında belirli bir elementi vurgulamak için kullanılır.
+     * Elementin arka planı sarı renkle ve kenarlığı kırmızı renkle gösterilir.
+     * </pre>
+     *
+     * @param element Vurgulanacak WebElement
+     * @return Vurgulanan WebElement (değişiklik yapmadan geri döndürür)
+     * @autor Baris Can Ates
+     */
+    public static WebElement highLightToElement(WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+        js.executeScript("arguments[0].setAttribute('style', 'background: yellow; border: 2px solid red;');", element);
+        return element;
+    }
+
+
+
+
 }
